@@ -3,14 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>Fuel Quote and Pricing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link href="css/style.css" rel="stylesheet">
-
 </head>
-
 <body>
   <nav class="nav">
     <div class="container">
@@ -21,33 +17,46 @@
             <ul class="navlinks">
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
-                <li><a href="#">Sign In</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li><a href="#">Contact Us</a></li>
             </ul>
         </div>
-        <span class="navTrigger">
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
     </div>
   </nav>
-  
-  <section class="home">
-      <div id="slideshow">
-        <div>
-          <img src="https://images.unsplash.com/photo-1471513671800-b09c87e1497c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">
-        </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80">
-        </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">
-        </div>
+  <div class="home">
+    <div class="auth-field">
+      <div class="button-field">
+        <div id="btn"></div>
+        <button type="button" class="toggle-btn" onclick="loginForm()">Log In</button>
+        <button type="button" class="toggle-btn" onclick="registerForm()">Resgister</button>
       </div>
-  </section>
-
-  <div style="height: 700px">
+      <form id="login" class="input-class">
+        <input id="loginUserID" type="text" class="input-field" placeholder="User ID" required>
+        <input id="loginPass" type="text" class="input-field" placeholder="Password">
+        <input id="loginSave" type="checkbox" class="check-box"><span class="login-save">Remember Me</span>
+        <button id="loginSubmit" type="submit" class="submit-btn">Log In</button>
+      </form>
+      <form id="register" class="input-class">
+        <input id="registerUserID" type="text" class="input-field" placeholder="User ID" required>
+        <input id="registerEmail" type="email" class="input-field" placeholder="Email" required>
+        <input id="registerPass" type="text" class="input-field" placeholder="Password" required>
+        <input id="registerConfirmPass" type="text" class="input-field" placeholder="Confirm Password" required>
+        <input id="termCondition" type="checkbox" class="check-box" required><span class="term-condition">I agree to the terms & conditions</span>
+        <button id="registerSubmit" type="submit" class="submit-btn">Register</button>
+      </form>
+    </div>
+    <div id="slideshow">
+      <div>
+        <img src="https://images.unsplash.com/photo-1471513671800-b09c87e1497c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80">
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80">
+      </div>
+    </div>
+  </div>
+  <div style="height: 700px;">
     <h2 class="myH2">What is this ?</h2>
     <p class="myP">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
@@ -57,20 +66,7 @@
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum ratione facere animi impedit rem labore sint repellendus ipsa sapiente voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem beatae id inventore quod voluptate qui deserunt, quis placeat, tempora ex totam, dolore sequi harum eos voluptatibus animi labore officiis minus laboriosam
     </p>
   </div>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="js/scripts.js"></script>
-
-  <script>
-      $(window).scroll(function() {
-          if ($(document).scrollTop() > 50) {
-              $('.nav').addClass('affix');
-              console.log("OK");
-          } else {
-              $('.nav').removeClass('affix');
-          }
-      });
-  </script>
-  
 </body>
 </html>
