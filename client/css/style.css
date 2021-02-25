@@ -7,6 +7,8 @@ html, body {
     font-family: "Quicksand", sans-serif;
     font-size: 62.5%;
     font-size: 10px;
+    width: 100%;
+    height: 100%;
 }
 
 .nav {
@@ -32,11 +34,12 @@ html, body {
 
 .nav div.logo a:hover {
     color: #40e0d0;
+    font-weight: bold;
 }
 
 .nav div.main_list {
     position: absolute;
-    left: 1001px;
+    left: 965px;
     height: 65px;
 }
 
@@ -49,8 +52,22 @@ html, body {
     padding: 0;
 }
 
-.nav div.main_list ul li {
-    width: auto;
+#about {
+    width: 88px;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+#services {
+    width: 108px;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+#contact {
+    width: 148px;
     height: 65px;
     padding: 0;
     padding-right: 3rem;
@@ -58,18 +75,19 @@ html, body {
 
 .nav div.main_list ul li a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(255, 255, 255);
     line-height: 65px;
     font-size: 2.8rem;
 }
 
 .nav div.main_list ul li a:hover {
     color: #40e0d0;
+    font-weight: bold;
 }
 
 .home {
     width: 100%;
-    height: 768px;
+    height: 100%;
 }
 
 .nav {
@@ -171,12 +189,11 @@ html, body {
     position: absolute;
     padding: 5px;
     background: #fff;
-    box-shadow: 0 0 10px 5px #84ffa24d;
     border-radius: 30px;
     overflow: hidden;
     width: 380px;
     height: 480px;
-    left: 1000px;
+    left: 975px;
     top: 150px;
 }
 
@@ -209,7 +226,7 @@ html, body {
     transition: 0.5s;
 }
 
-.input-class {
+.auth-input-class {
     position: absolute;
     width: 280px;
     transition: 0.5s;
@@ -266,6 +283,11 @@ html, body {
     font-size: 14px;
 }
 
+.submit-btn:hover {
+    background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),
+    linear-gradient(to right, #3bff7c, #fff458);
+}
+
 #forgotPass {
     font-size: 14px;
     margin: 35px;
@@ -273,3 +295,59 @@ html, body {
 }
 
 /* #10ff60, #ffee06 */
+
+.background {
+    width: 100%;
+    height: 100%;
+    background-image: url(https://images.unsplash.com/photo-1496629062893-b0f566065d44?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+    background-position: center;
+    background-size: cover;
+}
+
+.cover {
+    width: 1100px;
+    height: 20%;
+    margin: auto;
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
+    url(https://images.unsplash.com/photo-1504628958125-edac62db68fe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80);
+}
+
+.profile-pic {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background-color: rgb(190, 190, 190);
+    position: relative;
+    left: 5%;
+    top: 75px;
+}
+
+.info-field {
+    width: 1100px;
+    height: 80%;
+    top: 200px;
+    margin: auto;
+    background-color: #fff;
+}
+
+.edit-btn {
+    width: 150px;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    color: rgb(101, 219, 255);
+    background-color: #fff;
+    border: 2px solid rgb(125, 225, 255);
+    font-weight: bold;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    position: relative;
+    left: 77%;
+    top: 3%;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.05));
+}

@@ -11,13 +11,13 @@
   <nav class="nav">
     <div class="container">
         <div class="logo">
-            <a href="fuelquote.html">Placeholder Logo</a>
+            <a href="fuelquote.html">Logo</a>
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li id="about"><a href="#">About</a></li>
+                <li id="services"><a href="#">Services</a></li>
+                <li id="contact"><a href="#">Contact Us</a></li>
             </ul>
         </div>
     </div>
@@ -29,14 +29,14 @@
         <button type="button" class="toggle-btn" onclick="loginForm()">Log In</button>
         <button type="button" class="toggle-btn" onclick="registerForm()">Register</button>
       </div>
-      <form id="login" class="input-class">
+      <form id="login" class="auth-input-class">
         <input id="loginUserID" type="text" class="input-field" placeholder="User ID" required>
         <input id="loginPass" type="text" class="input-field" placeholder="Password" required>
         <input id="loginSave" type="checkbox" class="check-box"><span class="login-save">Remember Me</span>
         <button id="loginSubmit" type="submit" class="submit-btn">Log In</button>
         <div id="forgotPass"><a href="#">Forgot Password</a></div>
       </form>
-      <form id="register" class="input-class">
+      <form id="register" class="auth-input-class">
         <input id="registerUserID" type="text" class="input-field" placeholder="User ID" required>
         <input id="registerEmail" type="email" class="input-field" placeholder="Email" required>
         <input id="registerPass" type="text" class="input-field" placeholder="Password" required>
