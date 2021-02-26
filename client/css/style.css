@@ -192,7 +192,7 @@ html, body {
     border-radius: 30px;
     overflow: hidden;
     width: 25%;
-    height: 65%;
+    height: 70%;
     left: 65%;
     top: 20%;
 }
@@ -212,7 +212,8 @@ html, body {
     border: 0;
     outline: none;
     position: relative;
-    font-size: 15px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 #btn {
@@ -294,8 +295,6 @@ html, body {
     margin: 35px;
     text-align: center;
 }
-
-/* #10ff60, #ffee06 */
 
 .background {
     width: 100%;
