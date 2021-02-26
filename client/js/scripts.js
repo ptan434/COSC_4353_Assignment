@@ -1,8 +1,6 @@
 var x = document.getElementById("login");
 var y = document.getElementById("register");
 var z = document.getElementById("btn");
-var deliveryDate = document.getElementById("deliveryDate")
-var total_cost = document.getElementById("total")
 
 function registerForm() {
   x.style.left = "-400px"
