@@ -460,6 +460,10 @@ html, body {
     margin-bottom: 40px;
 }
 
+#gallonsRequested {
+    margin-bottom: 40px;
+}
+
 #addressOne,#addressTwo {
     width: 100%;
     margin-bottom: 10px;
@@ -469,6 +473,27 @@ html, body {
     width: 45%;
     margin-bottom: 40px;
     margin-right: 10px;
+}
+
+#deliveryAddress {
+    width: 90%;
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+}
+
+#deliveryDate {
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+}
+
+#suggested {
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+}
+
+#total_cost {
+    margin-bottom: 20px;
+    /* margin-right: 10px; */
 }
 
 #stateOne,#stateTwo {
