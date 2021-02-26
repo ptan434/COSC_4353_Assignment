@@ -455,6 +455,27 @@ html, body {
     background: transparent;
 }
 
+.fuel-history-table {
+    width: 90%;
+    margin: 8% auto;
+    text-align: center;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+
+.fuel-history-table-header {
+    background-color: rgb(21, 33, 56); 
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+}
+
+tr:nth-child(2n) {
+    background-color: #dddddd;
+}
+
 #fullName {
     width: 45%;
     margin-bottom: 40px;

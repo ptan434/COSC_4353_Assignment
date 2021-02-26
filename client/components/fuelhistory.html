@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fuel Quote History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="top-nav">
+      <button id="homePage" type="button" class="nav-btn">Home</button>
+      <button id="getQuote" type="button" class="nav-btn">Get Fuel Quote</button>
+      <button id="quoteHistory" type="button" class="nav-btn">Quote History</button>
+      <button id="signOut" type="button" class="nav-btn">Sign Out</button>
+    </nav>
+    <div class="background"></div>
+    <div class="cover">
+      <div class="profile-pic"></div>
+    </div>
+    <div class="info-field">
+      <button type="button" class="edit-btn">Edit Profile</button>
+
+      <!-- <div class="info-input-class-container"> -->
+        <table class="fuel-history-table">
+          <thead class="fuel-history-table-header">
+            <tr>
+              <th>Gallons Requested</th>
+              <th>Delivery Address</th>
+              <th>Delivery Date</th>
+              <th>Suggested Price/Gallon</th>
+              <th>Total Amount Due</th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
+          </tbody>
+        </table>
+      
+        <script>
+          var myArray = [
+              {'gallons':'1', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$x', 'total':'$x'},
+              {'gallons':'2', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$x', 'total':'$x' },
+              {'gallons':'3', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$x', 'total':'$x'},
+          ]
+          
+          buildTable(myArray)
+          function buildTable(data){
+            var table = document.getElementById('myTable')
+        
+            for (var i = 0; i < data.length; i++){
+              var row = `<tr>
+                        <td>${data[i].gallons}</td>
+                        <td>${data[i].address}</td>
+                        <td>${data[i].date}</td>
+                        <td>${data[i].price}</td>
+                        <td>${data[i].total}</td>
+                        </tr>`
+              table.innerHTML += row
+            }
+          }
+        
+        </script>
+      <!-- </div> -->
+    </div>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="../js/scripts.js"></script>
+</body>
+</html>
