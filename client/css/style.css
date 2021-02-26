@@ -17,6 +17,7 @@ html, body {
     position: fixed;
     line-height: 65px;
     text-align: center;
+    z-index: 1;
 }
 
 .nav div.logo {
@@ -39,7 +40,7 @@ html, body {
 
 .nav div.main_list {
     position: absolute;
-    left: 965px;
+    left: 64.4%;
     height: 65px;
 }
 
@@ -95,7 +96,6 @@ html, body {
     padding-bottom: 20px;
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
-    z-index: 1;
 }
 
 
@@ -191,15 +191,15 @@ html, body {
     background: #fff;
     border-radius: 30px;
     overflow: hidden;
-    width: 380px;
-    height: 480px;
-    left: 975px;
-    top: 150px;
+    width: 25%;
+    height: 65%;
+    left: 65%;
+    top: 20%;
 }
 
 .button-field {
     width: 220px;
-    margin: 35px 80px;
+    margin: 5% auto;
     position: relative;
     box-shadow: 0 0 20px 9px #24ff5b4d;
     border-radius: 30px;
@@ -228,7 +228,8 @@ html, body {
 
 .auth-input-class {
     position: absolute;
-    width: 280px;
+    width: 70%;
+    margin: auto;
     transition: 0.5s;
 }
 
@@ -259,7 +260,7 @@ html, body {
 .login-save {
     color: #777;
     font-size: 12px;
-    bottom: 150px;
+    bottom: 53%;
     position: absolute;
 }
 
@@ -299,40 +300,42 @@ html, body {
 .background {
     width: 100%;
     height: 100%;
+    position: fixed;
+    z-index: -1;
     background-image: url(https://images.unsplash.com/photo-1496629062893-b0f566065d44?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
     background-position: center;
     background-size: cover;
 }
 
 .cover {
-    width: 1100px;
-    height: 20%;
+    width: 75%;
+    height: 30%;
     margin: auto;
     background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
     url(https://images.unsplash.com/photo-1504628958125-edac62db68fe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80);
 }
 
 .profile-pic {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     border: 4px solid #fff;
     background-color: rgb(190, 190, 190);
     position: relative;
-    left: 5%;
-    top: 75px;
+    left: 8%;
+    top: 67%;
 }
 
 .info-field {
-    width: 1100px;
-    height: 80%;
+    width: 75%;
+    height: 700px;
     top: 200px;
     margin: auto;
     background-color: #fff;
 }
 
 .edit-btn {
-    width: 150px;
+    width: 15%;
     padding: 10px 30px;
     cursor: pointer;
     display: block;
@@ -350,4 +353,131 @@ html, body {
 
 .edit-btn:hover {
     background: linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.05));
+}
+
+.top-nav {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    line-height: 65px;
+    text-align: center;
+    background-color: #111;
+    z-index: 1;
+}
+
+.nav-btn {
+    height: 50px;
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    color: #f2f2f2;
+    background-color: #111;
+    outline: none;
+    border: 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+#homePage {
+    left: 12.5%;
+}
+
+#homePage:hover {
+    font-weight: bold;
+}
+
+#getQuote {
+    left: 65.9%;
+    transition: 0.5s;
+}
+
+#getQuote:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+#quoteHistory {
+    left: 74.4%;
+    transition: 0.5s;
+}
+
+#quoteHistory:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+#signOut {
+    left: 82%;
+    transition: 0.5s;
+    padding-right: 0.75%;
+}
+
+#signOut:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.info-input-class-container {
+    width: 80%;
+    margin: 8% auto;
+    border: 1px solid #111;
+    border-radius: 30px;
+}
+
+.info-input-class {
+    width: 80%;
+    margin: 5% auto;
+}
+
+.info-label,.info-label-required {
+    margin: 0;
+    font-size: 15px;
+}
+
+.info-label:after {
+    content:" *";
+    color: white;
+}
+
+.info-label-required:after {
+    content:" *";
+    color: red;
+}
+
+.info-input-field {
+    padding: 4px 0;
+    margin-top: 3px;
+    border-bottom: 1px solid #999;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    outline: none;
+    background: transparent;
+}
+
+#fullName {
+    width: 45%;
+    margin-bottom: 40px;
+}
+
+#addressOne,#addressTwo {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#cityOne,#cityTwo {
+    width: 45%;
+    margin-bottom: 40px;
+    margin-right: 10px;
+}
+
+#stateOne,#stateTwo {
+    margin-bottom: 40px;
+    margin-right: 10px;
+}
+
+#zipCodeOne,#zipCodeTwo {
+    width: 21.65%;
+    margin-bottom: 40px;
 }

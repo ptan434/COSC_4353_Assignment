@@ -8,15 +8,55 @@
   <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="background">
-      <div class="cover">
-        <div class="profile-pic"></div>
-      </div>
-      <div class="info-field">
-        <button type="button" class="edit-btn">Edit Profile</button>
-        <form class="info-input-class"></form>
+    <nav class="top-nav">
+      <button id="homePage" type="button" class="nav-btn">Home</button>
+      <button id="getQuote" type="button" class="nav-btn">Get Fuel Quote</button>
+      <button id="quoteHistory" type="button" class="nav-btn">Quote History</button>
+      <button id="signOut" type="button" class="nav-btn">Sign Out</button>
+    </nav>
+    <div class="background"></div>
+    <div class="cover">
+      <div class="profile-pic"></div>
+    </div>
+    <div class="info-field">
+      <button type="button" class="edit-btn">Edit Profile</button>
+      <div class="info-input-class-container">
+        <form class="info-input-class">
+          <label for="fullName" class="info-label-required">Full Name</label><br>
+          <input id="fullName" type="text" class="info-input-field" maxlength="50" required><br>
+          <label for="addressOne" class="info-label-required">Address 1</label><br>
+          <input id="addressOne" type="text" class="info-input-field" maxlength="100" required><br>
+          <label for="cityOne" class="info-label-required">City</label>
+          <input id="cityOne" type="text" class="info-input-field" maxlength="100" required>
+          <label for="stateOne" class="info-label-required">State</label>
+          <select id="stateOne" class="info-input-field" required>
+            <option value="null" selected>select</option>
+            <option value = "1">TX</option>
+            <option value = "2">CA</option>
+            <option value = "3">WA</option>
+            <option value = "4">FL</option>
+          </select>
+          <label for="zipCodeOne" class="info-label-required">Zip Code</label>
+          <input id="zipCodeOne" type="text" class="info-input-field" maxlength="9" minlength="5" required>
+          
+          <label for="addressTwo" class="info-label">Address 2 (optional)</label><br>
+          <input id="addressTwo" type="text" class="info-input-field" maxlength="100"><br>
+          <label for="cityTwo" class="info-label">City</label>
+          <input id="cityTwo" type="text" class="info-input-field" maxlength="100">
+          <label for="stateTwo" class="info-label">State</label>
+          <select id="stateTwo" class="info-input-field">
+            <option value="null" selected>select</option>
+            <option value = "1">TX</option>
+            <option value = "2">CA</option>
+            <option value = "3">WA</option>
+            <option value = "4">FL</option>
+          </select>
+          <label for="zipCodeTwo" class="info-label">Zip Code</label>
+          <input id="zipCodeTwo" type="text" class="info-input-field" maxlength="9" minlength="5">
+        </form>
       </div>
     </div>
+    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="../js/scripts.js"></script>
 </body>
