@@ -11,7 +11,7 @@
     <nav class="top-nav">
       <button id="homePage" type="button" class="nav-btn" onclick="location.href='../index.html'">Home</button>
       <button id="getQuote" type="button" class="nav-btn" onclick="location.href='../components/fuel_quote.html'">Get Fuel Quote</button>
-      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='../components/fuelhistory.html'">Quote History</button>
+      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='../components/fuel_history.html'">Quote History</button>
       <button id="signOut" type="button" class="nav-btn">Sign Out</button>
     </nav>
     <div class="background"></div>
@@ -20,8 +20,6 @@
     </div>
     <div class="info-field">
       <button type="button" class="edit-btn">Edit Profile</button>
-
-      <!-- <div class="info-input-class-container"> -->
         <table class="fuel-history-table">
           <thead class="fuel-history-table-header">
             <tr>
@@ -38,9 +36,9 @@
       
         <script>
           var myArray = [
-              {'gallons':'1', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$x', 'total':'$x'},
-              {'gallons':'2', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$x', 'total':'$x' },
-              {'gallons':'3', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$x', 'total':'$x'},
+              {'gallons':'1', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$1', 'total':'$1'},
+              {'gallons':'2', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$1', 'total':'$2' },
+              {'gallons':'3', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$1', 'total':'$3'},
           ]
           
           buildTable(myArray)
@@ -58,9 +56,7 @@
               table.innerHTML += row
             }
           }
-        
         </script>
-      <!-- </div> -->
     </div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
