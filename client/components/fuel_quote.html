@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Manage Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="top-nav">
+      <button id="homePage" type="button" class="nav-btn">Home</button>
+      <button id="getQuote" type="button" class="nav-btn">Get Fuel Quote</button>
+      <button id="quoteHistory" type="button" class="nav-btn">Quote History</button>
+      <button id="signOut" type="button" class="nav-btn">Sign Out</button>
+    </nav>
+    <div class="background"></div>
+    <div class="cover">
+      <div class="profile-pic"></div>
+    </div>
+    <div class="info-field">
+      <button type="button" class="edit-btn">Edit Profile</button>
+      <div class="info-input-class-container">
+        <form class="info-input-class">
+            <label for="gallonsRequested" class="info-label-required">Gallons Requested</label><br>
+            <input id="gallonsRequested" type="number" class="info-input-field" maxlength="100" placeholder="0" required><br>
+            <label for="deliveryAddress" class="info-label-required">Delivery Address</label><br>
+            <input id="deliveryAddress" type="date" class="info-input-field" maxlength="100" readonly><br>
+            <label for="deliveryDate" class="info-label-required">Delivery Date</label><br>
+            <input id="deliveryDate" type="date" class="info-input-field" maxlength="100" required><br>
+            <label for="suggested" class="info-label-required">Suggested Price/Gallon</label><br>
+            <input id="suggested" type="number" class="info-input-field" maxlength="100" placeholder="0" readonly><br>
+            <label for="total_cost" class="info-label-required">Total: </label><br>
+            <input id="total_cost" type="number" class="info-input-field" maxlength="100" placeholder="0" readonly><br>
+            <button id="fuel_quoteSubmit" type="submit" class="submit-btn">Submit!</button>
+            
+            
+    </div>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="../js/scripts.js"></script>
+</body>
+</html>
