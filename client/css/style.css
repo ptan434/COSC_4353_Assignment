@@ -1,86 +1,568 @@
-<!DOCTYPE html>
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Fuel Quote</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="../css/style.css" rel="stylesheet">
-</head>
-<body>
-    <nav class="top-nav">
-      <button id="homePage" type="button" class="nav-btn" onclick="location.href='../index.html'">Home</button>
-      <button id="getQuote" type="button" class="nav-btn" onclick="location.href='../components/fuel_quote.html'">Get Fuel Quote</button>
-      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='../components/fuel_history.html'">Quote History</button>
-      <button id="signOut" type="button" class="nav-btn">Sign Out</button>
-    </nav>
-    <div class="background"></div>
-    <div class="cover">
-      <div class="profile-pic"></div>
-    </div>
-    <div class="info-field">
-      <button type="button" class="edit-btn">Edit Profile</button>
-      <div class="info-input-class-container">
-        <form action ="/fuel_quote_handle" class="info-input-class" method="POST">
-            <label for="gallonsRequested" class="info-label-required">Gallons Requested</label><br>
-            <input id="gallonsRequested" name="gallonsRequested" type="number" class="info-input-field" maxlength="100" placeholder="0" required><br>
-            <label for="deliveryAddress" class="info-label-required">Delivery Address</label><br>
-            <input id="deliveryAddress" name="deliveryAddress" type="text" class="info-input-field" maxlength="100" readonly><br>
-            <label for="deliveryDate" class="info-label-required">Delivery Date</label><br>
-            <input id="deliveryDate" name="deliveryDate" type="date" class="info-input-field" maxlength="100" required><br>
-            <!-- <label for="suggested" class="info-label-required">Suggested Price/Gallon</label><br> -->
-            <button id="calculateBtn" type="button" class="submit-btn">Calculate Total</button><br>
-              <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <label for="suggested-price" class="info-label">Suggested Price/Gallon</label><br>
-                  <input type="text" name="suggested-price" id="suggested-price" class="info-input-field" readonly><br><br>
-                  <label for="total" class="info-label">Total</label><br>
-                  <input type="text" name="total" id="total" class="info-input-field" readonly><br>
-                </div>
-              </div><br><br>
-            <!-- <label for="total_cost" class="info-label-required">Total: </label><br> -->
-            <!-- <button id="total_cost">Calculate</button><br> -->
-            <button id="fuel_quoteSubmit" type="submit" class="submit-btn">Submit!</button>
-        </form> 
-            
-    </div>
-    <script>
-      // Get the modal
-      
-      var modal = document.getElementById("myModal");
-      
-      // Get the button that opens the modal
-      var btn = document.getElementById("calculateBtn");
-      
-      // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
-      
-      // When the user clicks the button, open the modal 
-      btn.onclick = function() {
-        modal.style.display = "block";
-      }
-      
-      // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
-        modal.style.display = "none";
-      }
-      
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      }
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-size: 62.5%;
+    font-size: 10px;
+    width: 100%;
+    height: 100%;
+}
 
-      document.getElementById("suggested-price").value = 10/2;
-      document.getElementById("total").value = 10;
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */ 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-      
-      </script>
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="../js/scripts.js"></script>
-</body>
-</html>
+.nav {
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    line-height: 65px;
+    text-align: center;
+    z-index: 1;
+}
+
+.nav div.logo {
+    float: left;
+    width: auto;
+    height: auto;
+    padding-left: 3rem;
+}
+
+.nav div.logo a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 3.2rem;
+}
+
+.nav div.logo a:hover {
+    color: #40e0d0;
+    font-weight: bold;
+}
+
+.nav div.main_list {
+    position: absolute;
+    left: 64.4%;
+    height: 65px;
+}
+
+.nav div.main_list ul {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#about {
+    width: 88px;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+#services {
+    width: 108px;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+#contact {
+    width: 148px;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+.nav div.main_list ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    line-height: 65px;
+    font-size: 2.8rem;
+}
+
+.nav div.main_list ul li a:hover {
+    color: #40e0d0;
+    font-weight: bold;
+}
+
+.home {
+    width: 100%;
+    height: 100%;
+}
+
+.nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .navTrigger {
+        display: block;
+    }
+    .nav div.logo {
+        margin-left: 15px;
+    }
+    .nav div.main_list {
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+    .nav div.show_list {
+        height: auto;
+        display: none;
+    }
+    .nav div.main_list ul {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #111;
+        background-position: center top;
+    }
+    .nav div.main_list ul li {
+        width: 100%;
+        text-align: right;
+    }
+    .nav div.main_list ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 3rem;
+        padding: 20px;
+    }
+    .nav div.media_button {
+        display: block;
+    }
+}
+
+.affix {
+    padding: 0;
+    background-color: #111;
+}
+
+.myH2 {
+	text-align:center;
+	font-size: 4rem;
+}
+.myP {
+	text-align: justify;
+	padding-left:15%;
+	padding-right:15%;
+	font-size: 20px;
+}
+@media all and (max-width:700px){
+	.myP {
+		padding:2%;
+	}
+}
+
+
+
+#slideshow {
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+  }
+  
+#slideshow img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.auth-field {
+    position: absolute;
+    padding: 5px;
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 25%;
+    height: 70%;
+    left: 65%;
+    top: 20%;
+}
+
+.button-field {
+    width: 220px;
+    margin: 5% auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #24ff5b4d;
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#btn {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(to right, #3bff7c, #fff458);
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+.auth-input-class {
+    position: absolute;
+    width: 70%;
+    margin: auto;
+    transition: 0.5s;
+}
+
+#login {
+    left: 55px;
+}
+
+#register {
+    left: 450px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-bottom: 1px solid #999;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    outline: none;
+    background: transparent;
+}
+
+.check-box {
+    margin: 30px 10px 30px 0;
+}
+
+.login-save {
+    color: #777;
+    font-size: 12px;
+    bottom: 53%;
+    position: absolute;
+}
+
+.term-condition {
+    color: #777;
+    font-size: 12px;
+    bottom: 65px;
+    position: absolute;
+}
+
+.submit-btn {
+    width: 90%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(to right, #3bff7c, #fff458);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),
+    linear-gradient(to right, #3bff7c, #fff458);
+}
+
+#forgotPass {
+    font-size: 14px;
+    margin: 35px;
+    text-align: center;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+    background-image: url(https://images.unsplash.com/photo-1496629062893-b0f566065d44?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
+    background-position: center;
+    background-size: cover;
+}
+
+.cover {
+    width: 75%;
+    height: 30%;
+    margin: auto;
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),
+    url(https://images.unsplash.com/photo-1504628958125-edac62db68fe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80);
+}
+
+.profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background-color: rgb(190, 190, 190);
+    position: relative;
+    left: 8%;
+    top: 67%;
+}
+
+.info-field {
+    width: 75%;
+    height: 800px;
+    top: 200px;
+    margin: auto;
+    background-color: #fff;
+}
+
+.edit-btn {
+    width: 15%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    color: rgb(101, 219, 255);
+    background-color: #fff;
+    border: 2px solid rgb(125, 225, 255);
+    font-weight: bold;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    position: relative;
+    left: 77%;
+    top: 3%;
+}
+
+.edit-btn:hover {
+    background: linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.05));
+}
+
+.top-nav {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    line-height: 65px;
+    text-align: center;
+    background-color: #111;
+    z-index: 1;
+}
+
+.nav-btn {
+    height: 50px;
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    color: #f2f2f2;
+    background-color: #111;
+    outline: none;
+    border: 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+#homePage {
+    left: 12.5%;
+}
+
+#homePage:hover {
+    font-weight: bold;
+}
+
+#getQuote {
+    left: 65.9%;
+    transition: 0.5s;
+}
+
+#getQuote:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+#quoteHistory {
+    left: 74.4%;
+    transition: 0.5s;
+}
+
+#quoteHistory:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+#signOut {
+    left: 82%;
+    transition: 0.5s;
+    padding-right: 0.75%;
+}
+
+#signOut:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.info-input-class-container {
+    width: 80%;
+    margin: 8% auto;
+    border: 1px solid #111;
+    border-radius: 30px;
+}
+
+.info-input-class {
+    width: 80%;
+    margin: 5% auto;
+}
+
+.info-label,.info-label-required {
+    margin: 0;
+    font-size: 15px;
+}
+
+.info-label:after {
+    content:" *";
+    color: white;
+}
+
+.info-label-required:after {
+    content:" *";
+    color: red;
+}
+
+.info-input-field {
+    padding: 4px 0;
+    margin-top: 3px;
+    border-bottom: 1px solid #999;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    outline: none;
+    background: transparent;
+}
+
+.fuel-history-table {
+    width: 90%;
+    margin: 8% auto;
+    text-align: center;
+    font-size: 15px;
+    border-collapse: collapse;
+}
+
+.fuel-history-table-header {
+    background-color: rgb(21, 33, 56); 
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+}
+
+tr:nth-child(2n) {
+    background-color: #dddddd;
+}
+
+#fullName {
+    width: 45%;
+    margin-bottom: 40px;
+}
+
+#addressOne,#addressTwo {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#cityOne,#cityTwo {
+    width: 45%;
+    margin-bottom: 40px;
+    margin-right: 10px;
+}
+
+#stateOne,#stateTwo {
+    margin-bottom: 40px;
+    margin-right: 10px;
+}
+
+#zipCodeOne,#zipCodeTwo {
+    width: 18%;
+    margin-bottom: 40px;
+}
+
+#gallonsRequested {
+    margin-bottom: 40px;
+}
+
+#deliveryAddress {
+    width: 90%;
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+}
+
+#deliveryDate {
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+}
+
+#suggested {
+    margin-bottom: 40px;
+    /* margin-right: 10px; */
+}
+
+#total_cost {
+    margin-bottom: 20px;
+    /* margin-right: 10px; */
+}
+
+
