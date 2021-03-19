@@ -21,21 +21,62 @@
     <div class="info-field">
       <button type="button" class="edit-btn">Edit Profile</button>
       <div class="info-input-class-container">
-        <form class="info-input-class">
+        <form action ="http://127.0.0.1:5500/client/components/fuel_quote.html" class="info-input-class" method="POST">
             <label for="gallonsRequested" class="info-label-required">Gallons Requested</label><br>
             <input id="gallonsRequested" type="number" class="info-input-field" maxlength="100" placeholder="0" required><br>
             <label for="deliveryAddress" class="info-label-required">Delivery Address</label><br>
             <input id="deliveryAddress" type="text" class="info-input-field" maxlength="100" readonly><br>
             <label for="deliveryDate" class="info-label-required">Delivery Date</label><br>
             <input id="deliveryDate" type="date" class="info-input-field" maxlength="100" required><br>
-            <label for="suggested" class="info-label-required">Suggested Price/Gallon</label><br>
-            <input id="suggested" type="number" class="info-input-field" maxlength="100" placeholder="0" readonly><br>
-            <label for="total_cost" class="info-label-required">Total </label><br>
-            <input id="total_cost" type="number" class="info-input-field" maxlength="100" placeholder="0" readonly><br>
+            <!-- <label for="suggested" class="info-label-required">Suggested Price/Gallon</label><br> -->
+            <!-- <button id="myBtn" type="button" class="submit-btn">Calculate Total</button><br> -->
+              <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p>Suggested Price/Gallon</p>
+                  <p id="suggested-price"></p>
+                  <p>Total Cost:</p>
+                  <p id="total"></p>
+                </div>
+              </div><br><br>
+            <!-- <label for="total_cost" class="info-label-required">Total: </label><br> -->
+            <!-- <button id="total_cost">Calculate</button><br> -->
             <button id="fuel_quoteSubmit" type="submit" class="submit-btn">Submit!</button>
-            
+           </form> 
             
     </div>
+    <script>
+      // Get the modal
+      
+      var modal = document.getElementById("myModal");
+      
+      // Get the button that opens the modal
+      var btn = document.getElementById("fuel_quoteSubmit");
+      
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      document.getElementById("suggested-price").innerHTML = '10/2';
+      document.getElementById("total").innerHTML = 10;
+      </script>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="../js/scripts.js"></script>
