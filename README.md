@@ -1,6 +1,5 @@
 # COSC_4353_Assignment
 Require: NodeJS, Local Postgresql Database <br />
-Database info: .env file
 
 cd server <br />
 npm install <br />
