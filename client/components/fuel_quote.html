@@ -9,9 +9,9 @@
 </head>
 <body>
     <nav class="top-nav">
-      <button id="homePage" type="button" class="nav-btn" onclick="location.href='../index.html'">Home</button>
-      <button id="getQuote" type="button" class="nav-btn" onclick="location.href='../components/fuel_quote.html'">Get Fuel Quote</button>
-      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='../components/fuel_history.html'">Quote History</button>
+      <button id="homePage" type="button" class="nav-btn" onclick="location.href='/index'">Home</button>
+      <button id="getQuote" type="button" class="nav-btn" onclick="location.href='/fuel_quote'">Get Fuel Quote</button>
+      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='/fuel_history'">Quote History</button>
       <button id="signOut" type="button" class="nav-btn">Sign Out</button>
     </nav>
     <div class="background"></div>
@@ -25,7 +25,7 @@
             <label for="gallonsRequested" class="info-label-required">Gallons Requested</label><br>
             <input id="gallonsRequested" name="gallonsRequested" type="number" class="info-input-field" maxlength="100" placeholder="0" required><br>
             <label for="deliveryAddress" class="info-label-required">Delivery Address</label><br>
-            <input id="deliveryAddress" name="deliveryAddress" type="text" class="info-input-field" maxlength="100" readonly><br>
+            <input id="deliveryAddress" value="1234 Apple Rat Street Houston, Texas"name="deliveryAddress" type="text" class="info-input-field" maxlength="100" readonly><br>
             <label for="deliveryDate" class="info-label-required">Delivery Date</label><br>
             <input id="deliveryDate" name="deliveryDate" type="date" class="info-input-field" maxlength="100" required><br>
             <!-- <label for="suggested" class="info-label-required">Suggested Price/Gallon</label><br> -->
@@ -34,15 +34,15 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                   <span class="close">&times;</span>
-                  <label for="suggested-price" class="info-label">Suggested Price/Gallon</label><br>
-                  <input type="text" name="suggested-price" id="suggested-price" class="info-input-field" readonly><br><br>
+                  <label for="suggestedPrice" class="info-label">Suggested Price/Gallon</label><br>
+                  <input type="text" name="suggestedPrice" id="suggestedPrice" class="info-input-field" readonly><br><br>
                   <label for="total" class="info-label">Total</label><br>
                   <input type="text" name="total" id="total" class="info-input-field" readonly><br>
                 </div>
               </div><br><br>
             <!-- <label for="total_cost" class="info-label-required">Total: </label><br> -->
             <!-- <button id="total_cost">Calculate</button><br> -->
-            <button id="fuel_quoteSubmit" type="submit" class="submit-btn">Submit!</button>
+            <button id="fuel_quoteSubmit" type="submit" class="submit-btn" onclick="fuel_history"> Submit!</button>
         </form> 
             
     </div>
@@ -74,7 +74,7 @@
         }
       }
 
-      document.getElementById("suggested-price").value = 10/2;
+      document.getElementById("suggestedPrice").value = 10/2;
       document.getElementById("total").value = 10;
 
       
