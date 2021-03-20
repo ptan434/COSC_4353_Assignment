@@ -62,6 +62,17 @@ app.get("/fuel_history", (req, res) => {
   res.sendFile(path.join(dirname + '/components/fuel_history.html'));
 });
 
+app.get("/fuel_quote_history", (req, res) => {
+  fs.readFile('user.json', 'utf8' , (err, info) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    var user_history = JSON.parse(info);
+    res.send(user_history)
+  })
+})
+
 app.post("/register", async(req, res) => {
     let {registerUserID, registerEmail, registerPass, registerConfirmPass, termCondition} = req.body;
     let errors = [];
