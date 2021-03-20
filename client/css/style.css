@@ -371,7 +371,7 @@ html, body {
     background-color: #fff;
 }
 
-.edit-btn {
+.edit-btn,.save-btn {
     width: 15%;
     padding: 10px 30px;
     cursor: pointer;
@@ -388,7 +388,7 @@ html, body {
     top: 3%;
 }
 
-.edit-btn:hover {
+.edit-btn:hover,.save-btn:hover {
     background: linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.05));
 }
 
@@ -565,4 +565,42 @@ tr:nth-child(2n) {
     /* margin-right: 10px; */
 }
 
+.login-text {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #111;
+}
 
+.login-text h1 {
+    text-align: center;
+    position: relative;
+}
+
+.auth-field-login {
+    position: absolute;
+    padding: 5px;
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 25%;
+    height: 50%;
+    left: 65%;
+    top: 20%;
+}
+
+.new-user-info-container {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    margin-left: 15%;
+    background-color: #fff;
+}
+
+.new-user-info {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    margin-top: 10%;
+    margin-left: 10%;
+}
