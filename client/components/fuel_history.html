@@ -9,9 +9,9 @@
 </head>
 <body>
     <nav class="top-nav">
-      <button id="homePage" type="button" class="nav-btn" onclick="location.href='../index.html'">Home</button>
-      <button id="getQuote" type="button" class="nav-btn" onclick="location.href='../components/fuel_quote.html'">Get Fuel Quote</button>
-      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='../components/fuel_history.html'">Quote History</button>
+      <button id="homePage" type="button" class="nav-btn" onclick="location.href='/index'">Home</button>
+      <button id="getQuote" type="button" class="nav-btn" onclick="location.href='/fuel_quote'">Get Fuel Quote</button>
+      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='/fuel_history'">Quote History</button>
       <button id="signOut" type="button" class="nav-btn">Sign Out</button>
     </nav>
     <div class="background"></div>
@@ -34,28 +34,23 @@
           </tbody>
         </table>
       
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
         <script>
-          var myArray = [
-              {'gallons':'1', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$1.00', 'total':'$1.00'},
-              {'gallons':'2', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$1.00', 'total':'$2.00' },
-              {'gallons':'3', 'address':'12345 Street Name City, State Zipcode', 'date':'mm/dd/yyyy', 'price':'$1.00', 'total':'$3.00'},
-          ]
-          
-          buildTable(myArray)
-          function buildTable(data){
-            var table = document.getElementById('myTable')
-        
-            for (var i = 0; i < data.length; i++){
-              var row = `<tr>
-                        <td>${data[i].gallons}</td>
-                        <td>${data[i].address}</td>
-                        <td>${data[i].date}</td>
-                        <td>${data[i].price}</td>
-                        <td>${data[i].total}</td>
-                        </tr>`
-              table.innerHTML += row
-            }
-          }
+          $(document).ready(function() {
+            $.getJSON("fuel_quote_history", function(data) {
+              var table = document.getElementById('myTable')
+              for (var i = 0; i < data.length; i++){
+                var row = `<tr>
+                          <td>${data[i].gallonsRequested}</td>
+                          <td>${data[i].deliveryAddress}</td>
+                          <td>${data[i].deliveryDate}</td>
+                          <td>${data[i].suggestedPrice}</td>
+                          <td>${data[i].total}</td>
+                          </tr>`
+                table.innerHTML += row
+              }
+            });
+          });
         </script>
     </div>
     
