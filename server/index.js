@@ -104,6 +104,8 @@ app.post("/fuel_quote", (req, res) => {
       );
     }
 
+})
+
 app.post("/register", async(req, res) => {
     let {registerUserID, registerEmail, registerPass, registerConfirmPass, termCondition} = req.body;
     let errors = [];
