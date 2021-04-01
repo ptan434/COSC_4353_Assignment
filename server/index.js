@@ -77,38 +77,7 @@ app.get("/create_profile", checkNotAuthenticated, async(req, res) => {
     res.sendFile(path.join(dirname + '/components/create_profile.html'));
 });
 
-app.get("/fuel_quote_history", (req, res) => {
-  fs.readFile('user.json', 'utf8' , (err, info) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    var user_history = JSON.parse(info);
-    res.send(user_history)
-  })
-})
 
-app.post("/fuel_quote_handle", (req, res) => {
-  let {gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, total} = req.body;
-  const infodata = req.body
-  const info = JSON.stringify(infodata)
-  
-
-  fs.readFile('user.json', function (err, data) {
-    var json = JSON.parse(data);
-    json.push(infodata);   
-
-    fs.writeFile("user.json", JSON.stringify(json), function(err){
-      if (err) throw err;
-      console.log('The "data to append" was appended to file!');
-    });
-})
-
-  console.log(info);
-  res.redirect("/fuel_history");
- 
-  // res.json(info);
-})
 
 app.post("/register", async(req, res) => {
     let {registerUserID, registerEmail, registerPass, registerConfirmPass, termCondition} = req.body;
