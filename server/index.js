@@ -77,7 +77,28 @@ app.get("/create_profile", checkNotAuthenticated, async(req, res) => {
     res.sendFile(path.join(dirname + '/components/create_profile.html'));
 });
 
-
+app.post("/fuel_quote", (req, res) => {
+  let {gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, total} = req.body;
+  let errors = [];
+  var passed = true;
+  if (!gallonsRequested || !deliveryAddress || !deliveryDate || !suggestedPrice || !total) {
+    errors.push({message: "Please enter all fields"});}
+    
+  
+    if (passed) {
+      pool.query(
+        `INSERT INTO fuel_quote (user_id, delivery_address, delivery_date, gallons_requested, suggested_price_per_gallon, total)
+            VALUES ($1, $2, $3, $4, $5, $6)`,
+        [req.user.user_id, deliveryAddress, deliveryDate, gallonsRequested, suggestedPrice, total],
+        (err, results) => {
+          if (err) {
+            throw err;
+          }
+          console.log("FuelQuote has been created");
+          res.redirect("/fuel_history");
+        }
+      );
+    }
 
 app.post("/register", async(req, res) => {
     let {registerUserID, registerEmail, registerPass, registerConfirmPass, termCondition} = req.body;
