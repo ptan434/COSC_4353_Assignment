@@ -301,3 +301,21 @@ const checkProfile = async(userID) => {
   );
   return response.rows;
 }
+
+const checkAddress = async(userID) => {
+  var response = await pool.query(
+    `SELECT * FROM profile
+      WHERE user_id = $1`,
+    [userID]
+  );
+  return response.rows;
+}
+
+const getAddress = async(primaryAddressID) => {
+  var response = await pool.query(
+    `SELECT * FROM address
+      WHERE address_id = $1`,
+    [primaryAddressID]
+  );
+  return response.rows;
+}
