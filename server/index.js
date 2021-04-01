@@ -27,6 +27,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', dirname);
+
 app.get('/index', (req, res) => {
     res.sendFile(path.join(dirname + '/index.html'));
 });
