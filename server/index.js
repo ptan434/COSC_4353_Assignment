@@ -55,8 +55,12 @@ app.get("/fuel_quote", checkNotAuthenticated, async(req, res) => {
 
 });
 
-app.get("/fuel_history", (req, res) => {
-  res.sendFile(path.join(dirname + '/components/fuel_history.html'));
+app.get("/fuel_history", checkNotAuthenticated, async(req, res) => {
+  console.log(req.isAuthenticated()); 
+  var userID = req.user.user_id;
+  const fuelHistory = await getFuelHistory(userID);
+  console.log(fuelHistory);
+  res.render(path.join(dirname + '/components/fuel_history.html'), {fuelHistory:fuelHistory});
 });
 
 app.get("/profile", checkNotAuthenticated, async(req, res) => {
@@ -316,6 +320,15 @@ const getAddress = async(primaryAddressID) => {
     `SELECT * FROM address
       WHERE address_id = $1`,
     [primaryAddressID]
+  );
+  return response.rows;
+}
+
+const getFuelHistory = async(userID) => {
+  var response = await pool.query(
+    `SELECT * FROM fuel_quote
+      WHERE user_id = $1`,
+    [userID]
   );
   return response.rows;
 }
