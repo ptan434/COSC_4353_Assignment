@@ -39,9 +39,20 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(dirname + '/components/login.html'));
 });
 
-app.get("/fuel_quote", checkNotAuthenticated, (req, res) => {
+app.get("/fuel_quote", checkNotAuthenticated, async(req, res) => {
   console.log(req.isAuthenticated());
-  res.sendFile(path.join(dirname + '/components/fuel_quote.html'));
+  console.log(req.user.user_id);
+  var userID = req.user.user_id;
+  var check = await checkAddress(userID);
+  console.log(check[0].primary_address_id);
+
+  var get = await getAddress(check[0].primary_address_id);
+  var address = get[0].address.trim() + " " + get[0].city.trim() + ", " + get[0].state.trim() + " " + get[0].zipcode.trim();
+  console.log(address);
+  
+ 
+  res.render(path.join(dirname + '/components/fuel_quote'), {address:address });
+
 });
 
 app.get("/fuel_history", (req, res) => {
