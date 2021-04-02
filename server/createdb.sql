@@ -30,6 +30,16 @@ CREATE TABLE profile(
   full_name VARCHAR NOT NULL
 );
 
+CREATE TABLE fuel_quote(
+  fuel_quote_id SERIAL PRIMARY KEY,
+  user_id VARCHAR REFERENCES users(user_id) NOT NULL,
+  delivery_address TEXT,
+  delivery_date TIMESTAMP,
+  gallons_requested INTEGER,
+  suggested_price_per_gallon NUMERIC,
+  total NUMERIC
+);
+
 INSERT INTO state VALUES ('AL');
 INSERT INTO state VALUES ('AK');
 INSERT INTO state VALUES ('AZ');
