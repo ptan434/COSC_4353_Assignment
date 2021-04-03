@@ -31,27 +31,18 @@
             </tr>
           </thead>
           <tbody id="myTable">
+            <% fuelHistory.forEach(function(entry) {%>
+              <tr> 
+                <td><%= entry.gallons_requested %></td>
+                <td><%= entry.delivery_address %></td>
+                <td><%= entry.delivery_date %></td>
+                <td><%= entry.suggested_price_per_gallon %></td>
+                <td><%= entry.total %></td>     
+              </tr>
+            <% }); %>
           </tbody>
         </table>
-      
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
-        <script>
-          $(document).ready(function() {
-            $.getJSON("fuel_quote_history", function(data) {
-              var table = document.getElementById('myTable')
-              for (var i = 0; i < data.length; i++){
-                var row = `<tr>
-                          <td>${data[i].gallonsRequested}</td>
-                          <td>${data[i].deliveryAddress}</td>
-                          <td>${data[i].deliveryDate}</td>
-                          <td>${data[i].suggestedPrice}</td>
-                          <td>${data[i].total}</td>
-                          </tr>`
-                table.innerHTML += row
-              }
-            });
-          });
-        </script>
+        
     </div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

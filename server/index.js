@@ -27,6 +27,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', dirname);
+
 app.get('/index', (req, res) => {
     res.sendFile(path.join(dirname + '/index.html'));
 });
@@ -35,13 +39,28 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(dirname + '/components/login.html'));
 });
 
-app.get("/fuel_quote", checkNotAuthenticated, (req, res) => {
+app.get("/fuel_quote", checkNotAuthenticated, async(req, res) => {
   console.log(req.isAuthenticated());
-  res.sendFile(path.join(dirname + '/components/fuel_quote.html'));
+  console.log(req.user.user_id);
+  var userID = req.user.user_id;
+  var check = await checkAddress(userID);
+  console.log(check[0].primary_address_id);
+
+  var get = await getAddress(check[0].primary_address_id);
+  var address = get[0].address.trim() + " " + get[0].city.trim() + ", " + get[0].state.trim() + " " + get[0].zipcode.trim();
+  console.log(address);
+  
+ 
+  res.render(path.join(dirname + '/components/fuel_quote'), {address:address });
+
 });
 
-app.get("/fuel_history", (req, res) => {
-  res.sendFile(path.join(dirname + '/components/fuel_history.html'));
+app.get("/fuel_history", checkNotAuthenticated, async(req, res) => {
+  console.log(req.isAuthenticated()); 
+  var userID = req.user.user_id;
+  const fuelHistory = await getFuelHistory(userID);
+  console.log(fuelHistory);
+  res.render(path.join(dirname + '/components/fuel_history.html'), {fuelHistory:fuelHistory});
 });
 
 app.get("/profile", checkNotAuthenticated, async(req, res) => {
@@ -62,37 +81,29 @@ app.get("/create_profile", checkNotAuthenticated, async(req, res) => {
     res.sendFile(path.join(dirname + '/components/create_profile.html'));
 });
 
-app.get("/fuel_quote_history", (req, res) => {
-  fs.readFile('user.json', 'utf8' , (err, info) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    var user_history = JSON.parse(info);
-    res.send(user_history)
-  })
-})
-
-app.post("/fuel_quote_handle", (req, res) => {
+app.post("/fuel_quote", (req, res) => {
   let {gallonsRequested, deliveryAddress, deliveryDate, suggestedPrice, total} = req.body;
-  const infodata = req.body
-  const info = JSON.stringify(infodata)
+  let errors = [];
+  var passed = true;
+  if (!gallonsRequested || !deliveryAddress || !deliveryDate || !suggestedPrice || !total) {
+    errors.push({message: "Please enter all fields"});}
+    
   
+    if (passed) {
+      pool.query(
+        `INSERT INTO fuel_quote (user_id, delivery_address, delivery_date, gallons_requested, suggested_price_per_gallon, total)
+            VALUES ($1, $2, $3, $4, $5, $6)`,
+        [req.user.user_id, deliveryAddress, deliveryDate, gallonsRequested, suggestedPrice, total],
+        (err, results) => {
+          if (err) {
+            throw err;
+          }
+          console.log("FuelQuote has been created");
+          res.redirect("/fuel_history");
+        }
+      );
+    }
 
-  fs.readFile('user.json', function (err, data) {
-    var json = JSON.parse(data);
-    json.push(infodata);   
-
-    fs.writeFile("user.json", JSON.stringify(json), function(err){
-      if (err) throw err;
-      console.log('The "data to append" was appended to file!');
-    });
-})
-
-  console.log(info);
-  res.redirect("/fuel_history");
- 
-  // res.json(info);
 })
 
 app.post("/register", async(req, res) => {
@@ -291,6 +302,33 @@ const checkEmail = async(registerEmail) => {
 const checkProfile = async(userID) => {
   var response = await pool.query(
     `SELECT * FROM profile
+      WHERE user_id = $1`,
+    [userID]
+  );
+  return response.rows;
+}
+
+const checkAddress = async(userID) => {
+  var response = await pool.query(
+    `SELECT * FROM profile
+      WHERE user_id = $1`,
+    [userID]
+  );
+  return response.rows;
+}
+
+const getAddress = async(primaryAddressID) => {
+  var response = await pool.query(
+    `SELECT * FROM address
+      WHERE address_id = $1`,
+    [primaryAddressID]
+  );
+  return response.rows;
+}
+
+const getFuelHistory = async(userID) => {
+  var response = await pool.query(
+    `SELECT * FROM fuel_quote
       WHERE user_id = $1`,
     [userID]
   );

@@ -21,11 +21,11 @@
     <div class="info-field">
       <button type="button" class="edit-btn" onclick="location.href='/profile'">Edit Profile</button>
       <div class="info-input-class-container">
-        <form action ="/fuel_quote_handle" class="info-input-class" method="POST">
+        <form action ="/fuel_quote" class="info-input-class" method="POST">
             <label for="gallonsRequested" class="info-label-required">Gallons Requested</label><br>
             <input id="gallonsRequested" name="gallonsRequested" type="number" class="info-input-field" maxlength="100" placeholder="0" required><br>
             <label for="deliveryAddress" class="info-label-required">Delivery Address</label><br>
-            <input id="deliveryAddress" value="1234 Apple Rat Street Houston, Texas"name="deliveryAddress" type="text" class="info-input-field" maxlength="100" readonly><br>
+            <input id="deliveryAddress" value="<%= address %>" name="deliveryAddress" type="text" class="info-input-field" maxlength="100" readonly><br>
             <label for="deliveryDate" class="info-label-required">Delivery Date</label><br>
             <input id="deliveryDate" name="deliveryDate" type="date" class="info-input-field" maxlength="100" required><br>
             <!-- <label for="suggested" class="info-label-required">Suggested Price/Gallon</label><br> -->
