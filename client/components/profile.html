@@ -19,40 +19,38 @@
       <div class="profile-pic"></div>
     </div>
     <div class="info-field">
-      <button type="button" class="edit-btn" onclick="location.href='/profile'">Edit Profile</button>
+      <button type="button" class="edit-btn" onclick="location.href='/edit_profile'">Edit Profile</button>
       <div class="info-input-class-container">
         <form class="info-input-class">
           <label for="fullName" class="info-label-required">Full Name</label><br>
-          <input id="fullName" type="text" class="info-input-field" maxlength="50" required><br>
+          <input id="fullName" type="text" class="info-input-field" maxlength="50" value="<%= check.full_name.trim() %>" readonly><br>
           <label for="addressOne" class="info-label-required">Address 1</label><br>
-          <input id="addressOne" type="text" class="info-input-field" maxlength="100" required><br>
+          <input id="addressOne" type="text" class="info-input-field" maxlength="100" value="<%= primary_address.address.trim() %>" readonly><br>
           <label for="cityOne" class="info-label-required">City</label>
-          <input id="cityOne" type="text" class="info-input-field" maxlength="100" required>
+          <input id="cityOne" type="text" class="info-input-field" maxlength="100" value="<%= primary_address.city.trim() %>" readonly> 
           <label for="stateOne" class="info-label-required">State</label>
-          <select id="stateOne" class="info-input-field" required>
-            <option value="null" selected>select</option>
-            <option value = "1">TX</option>
-            <option value = "2">CA</option>
-            <option value = "3">WA</option>
-            <option value = "4">FL</option>
-          </select>
+          <input id="stateOne" class="info-input-field" size="2" value="<%= primary_address.state.trim() %>" readonly>
           <label for="zipCodeOne" class="info-label-required">Zip Code</label>
-          <input id="zipCodeOne" type="text" class="info-input-field" maxlength="9" minlength="5" required><br>
+          <input id="zipCodeOne" type="text" class="info-input-field" maxlength="9" minlength="5" value="<%= primary_address.zipcode.trim() %>" readonly><br>
           
           <label for="addressTwo" class="info-label">Address 2 (optional)</label><br>
-          <input id="addressTwo" type="text" class="info-input-field" maxlength="100"><br>
-          <label for="cityTwo" class="info-label">City</label>
-          <input id="cityTwo" type="text" class="info-input-field" maxlength="100">
-          <label for="stateTwo" class="info-label">State</label>
-          <select id="stateTwo" class="info-input-field">
-            <option value="null" selected>select</option>
-            <option value = "1">TX</option>
-            <option value = "2">CA</option>
-            <option value = "3">WA</option>
-            <option value = "4">FL</option>
-          </select>
-          <label for="zipCodeTwo" class="info-label">Zip Code</label>
-          <input id="zipCodeTwo" type="text" class="info-input-field" maxlength="9" minlength="5"><br>
+          <% if (secondary_address){ %>
+            <input id="addressTwo" type="text" class="info-input-field" maxlength="100" value="<%= secondary_address.address.trim() %>" readonly><br>
+            <label for="cityTwo" class="info-label">City</label>
+            <input id="cityTwo" type="text" class="info-input-field" maxlength="100" value="<%= secondary_address.city.trim() %>" readonly>
+            <label for="stateTwo" class="info-label">State</label>
+            <input id="stateTwo" class="info-input-field" size="2" value="<%= secondary_address.state.trim() %>" readonly> 
+            <label for="zipCodeTwo" class="info-label">Zip Code</label>
+            <input id="zipCodeTwo" type="text" class="info-input-field" maxlength="9" minlength="5" value="<%= secondary_address.zipcode.trim() %>" readonly><br>
+          <% } else{ %>  
+            <input id="addressTwo" type="text" class="info-input-field" maxlength="100" readonly><br>
+            <label for="cityTwo" class="info-label">City</label>
+            <input id="cityTwo" type="text" class="info-input-field" maxlength="100" readonly>
+            <label for="stateTwo" class="info-label">State</label>
+            <input id="stateTwo" class="info-input-field" size="2" readonly> 
+            <label for="zipCodeTwo" class="info-label">Zip Code</label>
+            <input id="zipCodeTwo" type="text" class="info-input-field" maxlength="9" minlength="5" readonly><br>
+          <% } %>
         </form>
       </div>
     </div>
