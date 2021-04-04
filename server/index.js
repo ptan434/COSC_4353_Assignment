@@ -137,7 +137,6 @@ app.post("/register", async(req, res) => {
 
     if (errors.length > 0) {
       console.log(errors);
-      res.status(404);
     }
     else {
       hashedPassword = await bcrypt.hash(registerPass, 10);
