@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Edit Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="top-nav">
+    <button id="homePage" type="button" class="nav-btn" onclick="location.href='/index'">Home</button>
+    <button id="getQuote" type="button" class="nav-btn" onclick="location.href='/fuel_quote'">Get Fuel Quote</button>
+    <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='/fuel_history'">Quote History</button>
+    <button id="signOut" type="button" class="nav-btn">Sign Out</button>
+  </nav>
+    <div class="background"></div>
+    <div class="cover">
+      <div class="profile-pic"></div>
+    </div>
+    <div class="info-field">
+      <button type="button" class="edit-btn" onclick="location.href='/profile'">Return to Profile</button>
+      <div class="info-input-class-container">
+        <form class="info-input-class" action="/edit_profile" method="POST">
+          <label for="fullName" class="info-label-required">Full Name</label><br>
+          <input id="fullName" name="fullName"type="text" class="info-input-field" maxlength="50" value="<%= check.full_name.trim() %>" required><br>
+          <label for="addressOne" class="info-label-required">Address 1</label><br>
+          <input id="addressOne" name="addressOne"type="text" class="info-input-field" maxlength="100" value="<%= primary_address.address.trim() %>" required><br>
+          <label for="cityOne" class="info-label-required">City</label>
+          <input id="cityOne" name="cityOne" type="text" class="info-input-field" maxlength="100" value="<%= primary_address.city.trim() %>" required>
+          <label for="stateOne" class="info-label-required">State</label>
+          <select id="stateOne" name="stateOne" class="info-input-field" required>
+            <option disabled selected value>Select</option>
+            <option value = "TX">TX</option>
+            <option value = "CA">CA</option>
+            <option value = "WA">WA</option>
+            <option value = "FL">FL</option>
+          </select>
+          <label for="zipCodeOne" class="info-label-required">Zip Code</label>
+          <input id="zipCodeOne" name="zipCodeOne" type="text" class="info-input-field" maxlength="9" minlength="5" value="<%= primary_address.zipcode.trim() %>" required><br>
+          
+          <label for="addressTwo" class="info-label">Address 2 (optional)</label><br>
+          <% if (secondary_address){ %>
+            <input id="addressTwo" name="addressTwo" type="text" class="info-input-field" maxlength="100" value="<%= secondary_address.address.trim() %>"><br>
+            <label for="cityTwo" class="info-label">City</label>
+            <input id="cityTwo" name="cityTwo" type="text" class="info-input-field" maxlength="100" value="<%= secondary_address.city.trim() %>">
+            <label for="stateTwo" class="info-label">State</label>
+            <select id="stateTwo" name="stateTwo" class="info-input-field">
+              <option value="null" selected>Select</option>
+              <option value = "TX">TX</option>
+              <option value = "CA">CA</option>
+              <option value = "WA">WA</option>
+              <option value = "FL">FL</option>
+            </select>
+            <label for="zipCodeTwo" class="info-label">Zip Code</label>
+            <input id="zipCodeTwo" name="zipCodeTwo" type="text" class="info-input-field" maxlength="9" minlength="5" value="<%= secondary_address.zipcode.trim() %>"><br>
+          <% } else{ %>  
+            <input id="addressTwo" name="addressTwo" type="text" class="info-input-field" maxlength="100"><br>
+            <label for="cityTwo" class="info-label">City</label>
+            <input id="cityTwo" name="cityTwo" type="text" class="info-input-field" maxlength="100">
+            <label for="stateTwo" class="info-label">State</label>
+            <select id="stateTwo" name="stateTwo" class="info-input-field">
+              <option value="null" selected>Select</option>
+              <option value = "TX">TX</option>
+              <option value = "CA">CA</option>
+              <option value = "WA">WA</option>
+              <option value = "FL">FL</option>
+            </select>
+            <label for="zipCodeTwo" class="info-label">Zip Code</label>
+            <input id="zipCodeTwo" name="zipCodeTwo" type="text" class="info-input-field" maxlength="9" minlength="5"><br>
+          <% } %>
+          <button type="submit" class="submit-btn">Save Profile</button>
+        </form>
+      </div>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.submit-btn').click(function(){
+        var secondaryAddress;
+        var address_two = $('#addressTwo').val();
+        var city_two = $('#cityTwo').val();
+        var state_two = $('#stateTwo').val();
+        var zipcode_two = $('#zipCodeTwo').val();
+        if (address_two != "" && city_two != "" && state_two != "null" && zipcode_two != "") {
+          secondaryAddress = true;
+        }
+        else if (address_two == "" && city_two == "" && state_two == "null" && zipcode_two == ""){
+          secondaryAddress = false;
+        }
+        else 
+          alert("Please enter all required fields for secondary address.");
+      })
+    })
+  </script>
+  <script src="../js/scripts.js"></script>
+</body>
+</html>
