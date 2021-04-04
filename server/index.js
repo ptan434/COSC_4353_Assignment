@@ -23,13 +23,14 @@ app.use(session({
       saveUninitialized: false
     })
 );
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', dirname);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-app.set('views', dirname);
+
 
 app.get('/index', (req, res) => {
     res.sendFile(path.join(dirname + '/index.html'));
@@ -66,8 +67,12 @@ app.get("/fuel_history", checkNotAuthenticated, async(req, res) => {
 app.get("/profile", checkNotAuthenticated, async(req, res) => {
   console.log(req.isAuthenticated());
   var check = await checkProfile(req.user.user_id);
-  if (check.length > 0)
-    res.sendFile(path.join(dirname + '/components/profile.html'));
+  console.log(check);
+  if (check.length > 0) {
+    var primary_address = await getAddress(check[0].primary_address_id);
+    var secondary_address = await getAddress(check[0].secondary_address_id);
+    res.render(path.join(dirname + '/components/profile.html'), {check:check[0], primary_address:primary_address[0], secondary_address:secondary_address[0]});
+  }
   else
     res.redirect("/create_profile");
 });
@@ -79,6 +84,19 @@ app.get("/create_profile", checkNotAuthenticated, async(req, res) => {
     res.redirect("/profile");
   else
     res.sendFile(path.join(dirname + '/components/create_profile.html'));
+});
+
+app.get("/edit_profile", checkNotAuthenticated, async(req, res) => {
+  console.log(req.isAuthenticated());
+  var check = await checkProfile(req.user.user_id);
+  console.log(check);
+  if (check.length > 0) {
+    var primary_address = await getAddress(check[0].primary_address_id);
+    var secondary_address = await getAddress(check[0].secondary_address_id);
+    res.render(path.join(dirname + '/components/edit_profile.html'), {check:check[0], primary_address:primary_address[0], secondary_address:secondary_address[0]});
+  }
+  else
+    res.redirect("/create_profile");
 });
 
 app.post("/fuel_quote", (req, res) => {
@@ -119,6 +137,7 @@ app.post("/register", async(req, res) => {
 
     if (errors.length > 0) {
       console.log(errors);
+      res.status(404);
     }
     else {
       hashedPassword = await bcrypt.hash(registerPass, 10);
@@ -232,6 +251,140 @@ app.post("/create_profile", async(req, res) => {
   }
 });
 
+app.post("/edit_profile", async(req, res) => {
+  let {fullName, addressOne, cityOne, stateOne, zipCodeOne,
+    addressTwo, cityTwo, stateTwo, zipCodeTwo} = req.body;
+  var queryAddress;
+  var userID = req.user.user_id;
+  var secondaryAddress;
+  var primaryAddressID;
+  var secondaryAddressID;
+  var currentFullName;
+  let errors = [];
+
+  if (fullName.length > 50)
+    errors.push({message: "Maximum length for name is 50"});
+  if (addressOne.length > 100)
+    errors.push({message: "Maximum length for address is 100"});
+  if (cityOne.length > 100)
+    errors.push({message: "Maximum length for city is 100"});
+  if (zipCodeOne.length < 5)
+    errors.push({message: "Minimum length for zip code is 5"});
+  if (zipCodeOne.length > 9)
+    errors.push({message: "Maximum length for zip code is 9"});
+
+  if (fullName == "" || addressOne == "" || cityOne == "" || stateOne == "null" || zipCodeOne == "")
+    errors.push({message: "Please enter all required fields for primary address"});
+  else if (addressTwo != "" && cityTwo != "" && stateTwo != "null" && zipCodeTwo != "")
+    secondaryAddress = true;
+  else if (addressTwo != "" || cityTwo != "" || stateTwo != "null" || zipCodeTwo != "")
+    errors.push({message: "Please enter all required fields for secondary address"});
+  else
+    secondaryAddress = false;
+  
+  if (errors.length > 0) {
+    console.log(errors);
+  }
+  else {
+    var profile = await checkProfile(userID);
+    primaryAddressID = profile[0].primary_address_id;
+    secondaryAddressID = profile[0].secondary_address_id;
+    currentFullName = profile[0].full_name;
+    
+    pool.query(
+      `UPDATE address
+      SET address = '${capitalize(addressOne)}', city = '${capitalize(cityOne)}', state = '${stateOne}', zipcode = '${zipCodeOne}'
+      WHERE address_id = '${primaryAddressID}'`,
+        (err, results) => {
+          if (err) {
+            throw err;
+          }
+        }
+    );
+
+    if (currentFullName != fullName) {
+      pool.query(
+        `UPDATE profile
+        SET full_name = '${capitalize(fullName)}'
+        WHERE user_id = '${userID}'`,
+          (err, results) => {
+            if (err) {
+              throw err;
+            }
+            console.log(`Updated name from '${currentFullName}' to '${fullName}' successfully.`);
+          }
+      );
+    }
+
+    if (secondaryAddress) {
+      if (secondaryAddressID == null) {
+        queryAddress =
+        `INSERT INTO address (address, city, state, zipcode)
+          VALUES ('${capitalize(addressTwo)}', '${capitalize(cityTwo)}', '${stateTwo}', '${zipCodeTwo}')
+          RETURNING address_id`;
+        secondaryAddressID = await pool.query(queryAddress);
+        secondaryAddressID = secondaryAddressID.rows[0].address_id;
+        pool.query(
+          `UPDATE profile
+          SET secondary_address_id = '${secondaryAddressID}'
+          WHERE user_id = '${userID}'`,
+            (err, results) => {
+              if (err) {
+                throw err;
+              }
+              console.log("Your profile has been saved successfully.");
+              res.redirect("/profile");
+            }
+        );
+      }
+      else {
+        pool.query(
+          `UPDATE address
+          SET address = '${capitalize(addressTwo)}', city = '${capitalize(cityTwo)}', state = '${stateTwo}', zipcode = '${zipCodeTwo}'
+          WHERE address_id = '${secondaryAddressID}'`,
+            (err, results) => {
+              if (err) {
+                throw err;
+              }
+              console.log("Your profile has been saved successfully.");
+              res.redirect("/profile");
+            }
+        );
+      }
+    }
+    else {
+      if (secondaryAddressID != null) {
+        pool.query(
+          `UPDATE profile
+          SET secondary_address_id = NULL
+          WHERE user_id = '${userID}'`,
+            (err, results) => {
+              if (err) {
+                throw err;
+              }
+              console.log("Updated profile successfully.");
+            }
+        );
+        const query = await pool.query(
+          `DELETE FROM address
+          WHERE address_id = '${secondaryAddressID}'`,
+          (err, results) => {
+            if (err) {
+              throw err;
+            }
+            console.log("Your profile has been saved successfully.");
+            res.redirect("/profile");
+          }
+        );
+      }
+      else {
+        console.log("Your profile has been saved successfully.");
+        res.redirect("/profile");
+      }
+    }
+  }
+});
+
 app.post("/login",
   passport.authenticate("local", {
     failureRedirect: "/index",
@@ -278,8 +431,16 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 app.listen(PORT, ()=>{
-    console.log(`Server started on port ${PORT}`);
+    console.log(`Server started at http://localhost:${PORT}`);
 });
+
+function capitalize(s) {
+  var words = s.split(" ");
+  for (let i = 0; i < words.length; i++) {
+      words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+  }
+  return words.join(" ");
+}
 
 const checkID = async(registerUserID) => {
   var response = await pool.query(
