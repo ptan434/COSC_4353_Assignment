@@ -48,10 +48,22 @@ app.get("/fuel_quote", checkNotAuthenticated, async(req, res) => {
 
   var get = await getAddress(check[0].primary_address_id);
   var address = get[0].address.trim() + " " + get[0].city.trim() + ", " + get[0].state.trim() + " " + get[0].zipcode.trim();
-  console.log(address);
+  var history = await hasHistory(userID);
+  var loc_factor = 0;
+  var history_factor = 0;
   
- 
-  res.render(path.join(dirname + '/components/fuel_quote'), {address:address });
+  if (get[0].state.trim() == "TX") {
+    loc_factor = .02;
+  }
+  else {
+    loc_factor = .04;
+  }
+  
+  if (history[0].count > 0) {
+    history_factor = .01;
+  }
+  
+  res.render(path.join(dirname + '/components/fuel_quote'), {address:address, loc_factor:loc_factor, history_factor:history_factor });
 
 });
 
