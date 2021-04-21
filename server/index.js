@@ -346,3 +346,12 @@ const getFuelHistory = async(userID) => {
   );
   return response.rows;
 }
+
+const hasHistory = async(userID) => {
+  var response = await pool.query(
+    `SELECT COUNT (*) FROM fuel_quote
+      WHERE user_id = $1`,
+    [userID]
+  );
+  return response.rows;
+}
