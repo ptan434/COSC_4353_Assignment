@@ -64,7 +64,6 @@ app.get("/fuel_quote", checkNotAuthenticated, async(req, res) => {
   }
   
   res.render(path.join(dirname + '/components/fuel_quote'), {address:address, loc_factor:loc_factor, history_factor:history_factor });
-
 });
 
 app.get("/fuel_history", checkNotAuthenticated, async(req, res) => {
@@ -99,13 +98,12 @@ app.post("/fuel_quote", (req, res) => {
   var passed = true;
   if (!gallonsRequested || !deliveryAddress || !deliveryDate || !suggestedPrice || !total) {
     errors.push({message: "Please enter all fields"});}
-    
   
     if (passed) {
       pool.query(
         `INSERT INTO fuel_quote (user_id, delivery_address, delivery_date, gallons_requested, suggested_price_per_gallon, total)
             VALUES ($1, $2, $3, $4, $5, $6)`,
-        [req.user.user_id, deliveryAddress, deliveryDate, gallonsRequested, suggestedPrice, total],
+        [req.user.user_id, deliveryAddress, deliveryDate, gallonsRequested, suggestedPrice.substring(1), total.substring(1)],
         (err, results) => {
           if (err) {
             throw err;
@@ -115,7 +113,6 @@ app.post("/fuel_quote", (req, res) => {
         }
       );
     }
-
 })
 
 app.post("/register", async(req, res) => {
