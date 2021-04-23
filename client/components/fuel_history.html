@@ -20,6 +20,7 @@
     </div>
     <div class="info-field">
       <button type="button" class="edit-btn" onclick="location.href='/profile'">Edit Profile</button>
+      <div class="info-input-class">
         <table class="fuel-history-table">
           <thead class="fuel-history-table-header">
             <tr>
@@ -36,13 +37,13 @@
                 <td><%= entry.gallons_requested %></td>
                 <td><%= entry.delivery_address %></td>
                 <td><%= entry.delivery_date %></td>
-                <td><%= entry.suggested_price_per_gallon %></td>
-                <td><%= entry.total %></td>     
+                <td>$<%= entry.suggested_price_per_gallon %></td>
+                <td>$<%= entry.total %></td>     
               </tr>
             <% }); %>
           </tbody>
         </table>
-        
+      </div>
     </div>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

@@ -365,7 +365,7 @@ html, body {
 
 .info-field {
     width: 75%;
-    height: 800px;
+    min-height: 800px;
     top: 200px;
     margin: auto;
     background-color: #fff;
@@ -385,7 +385,7 @@ html, body {
     font-size: 15px;
     position: relative;
     left: 77%;
-    top: 3%;
+    top: 24px;
 }
 
 .edit-btn:hover,.save-btn:hover {

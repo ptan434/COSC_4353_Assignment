@@ -48,11 +48,22 @@ app.get("/fuel_quote", checkNotAuthenticated, async(req, res) => {
 
   var get = await getAddress(check[0].primary_address_id);
   var address = get[0].address.trim() + " " + get[0].city.trim() + ", " + get[0].state.trim() + " " + get[0].zipcode.trim();
-  console.log(address);
+  var history = await hasHistory(userID);
+  var loc_factor = 0;
+  var history_factor = 0;
   
- 
-  res.render(path.join(dirname + '/components/fuel_quote'), {address:address });
-
+  if (get[0].state.trim() == "TX") {
+    loc_factor = .02;
+  }
+  else {
+    loc_factor = .04;
+  }
+  
+  if (history[0].count > 0) {
+    history_factor = .01;
+  }
+  
+  res.render(path.join(dirname + '/components/fuel_quote'), {address:address, loc_factor:loc_factor, history_factor:history_factor });
 });
 
 app.get("/fuel_history", checkNotAuthenticated, async(req, res) => {
@@ -87,13 +98,12 @@ app.post("/fuel_quote", (req, res) => {
   var passed = true;
   if (!gallonsRequested || !deliveryAddress || !deliveryDate || !suggestedPrice || !total) {
     errors.push({message: "Please enter all fields"});}
-    
   
     if (passed) {
       pool.query(
         `INSERT INTO fuel_quote (user_id, delivery_address, delivery_date, gallons_requested, suggested_price_per_gallon, total)
             VALUES ($1, $2, $3, $4, $5, $6)`,
-        [req.user.user_id, deliveryAddress, deliveryDate, gallonsRequested, suggestedPrice, total],
+        [req.user.user_id, deliveryAddress, deliveryDate, gallonsRequested, suggestedPrice.substring(1), total.substring(1)],
         (err, results) => {
           if (err) {
             throw err;
@@ -103,7 +113,6 @@ app.post("/fuel_quote", (req, res) => {
         }
       );
     }
-
 })
 
 app.post("/register", async(req, res) => {
@@ -329,6 +338,15 @@ const getAddress = async(primaryAddressID) => {
 const getFuelHistory = async(userID) => {
   var response = await pool.query(
     `SELECT * FROM fuel_quote
+      WHERE user_id = $1`,
+    [userID]
+  );
+  return response.rows;
+}
+
+const hasHistory = async(userID) => {
+  var response = await pool.query(
+    `SELECT COUNT (*) FROM fuel_quote
       WHERE user_id = $1`,
     [userID]
   );

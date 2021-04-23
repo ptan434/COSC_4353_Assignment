@@ -48,7 +48,6 @@
     </div>
     <script>
       // Get the modal
-      
       var modal = document.getElementById("myModal");
       
       // Get the button that opens the modal
@@ -60,6 +59,23 @@
       // When the user clicks the button, open the modal 
       btn.onclick = function() {
         modal.style.display = "block";
+        var current_price = 1.50;
+        var company_profit = 0.10;
+        var gallons_requested = document.getElementById("gallonsRequested").value;
+        var gallons_requested_factor = 0;
+        if (gallons_requested < 1000) {
+          gallons_requested_factor = 0.03;
+        }
+        else {
+          gallons_requested_factor = 0.02;
+        }
+
+        var margin = current_price * (parseFloat("<%= loc_factor %>") - parseFloat("<%= history_factor %>") + gallons_requested_factor + company_profit);
+        var suggested_price = current_price + margin;
+        var total_price = (gallons_requested * suggested_price).toFixed(2);
+        
+        document.getElementById("suggestedPrice").value = "$" + suggested_price;
+        document.getElementById("total").value = "$" + total_price;
       }
       
       // When the user clicks on <span> (x), close the modal
@@ -73,11 +89,6 @@
           modal.style.display = "none";
         }
       }
-
-      document.getElementById("suggestedPrice").value = 10/2;
-      document.getElementById("total").value = 10;
-
-      
       </script>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
