@@ -11,7 +11,7 @@
   <nav class="nav">
     <div class="container">
         <div class="logo">
-            <a href="index.html">Logo</a>
+            <a href="index.html">Group 19</a>
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
@@ -23,6 +23,9 @@
     </div>
   </nav>
   <div class="home">
+    <% if(message){ %>
+      <div class="alert"><%= message %></div>
+    <% } %>
     <div class="auth-field">
       <div class="button-field">
         <div id="btn"></div>
@@ -31,16 +34,16 @@
       </div>
       <form id="login" class="auth-input-class" action="/login" method="POST">
         <input id="loginUserID" name="loginUserID" type="text" class="input-field" placeholder="User ID" required>
-        <input id="loginPass" name="loginPass" type="text" class="input-field" placeholder="Password" required>
-        <input id="loginSave" name="loginSave" type="checkbox" class="check-box"><span class="login-save">Remember Me</span>
+        <input id="loginPass" name="loginPass" type="password" class="input-field" placeholder="Password" required>
+        <!-- <input id="loginSave" name="loginSave" type="checkbox" class="check-box"><span class="login-save">Remember Me</span> -->
         <button id="loginSubmit" type="submit" class="submit-btn">Log In</button>
         <div id="forgotPass"><a href="#">Forgot Password</a></div>
       </form>
       <form id="register" class="auth-input-class" action="/register" method="POST">
         <input id="registerUserID" name="registerUserID" type="text" class="input-field" placeholder="User ID" required>
         <input id="registerEmail" name="registerEmail" type="email" class="input-field" placeholder="Email" required>
-        <input id="registerPass" name="registerPass" type="text" class="input-field" placeholder="Password" required>
-        <input id="registerConfirmPass" name="registerConfirmPass" type="text" class="input-field" placeholder="Confirm Password" required>
+        <input id="registerPass" name="registerPass" type="password" class="input-field" placeholder="Password" required>
+        <input id="registerConfirmPass" name="registerConfirmPass" type="password" class="input-field" placeholder="Confirm Password" required>
         <input id="termCondition" name="termCondition" type="checkbox" class="check-box" required><span class="term-condition">I agree to the terms & conditions</span>
         <button id="registerSubmit" type="submit" class="submit-btn">Register</button>
       </form>
