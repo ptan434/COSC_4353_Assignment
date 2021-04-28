@@ -8,18 +8,16 @@
   <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="top-nav">
-      <button id="homePage" type="button" class="nav-btn" onclick="location.href='/index'">Home</button>
-      <button id="getQuote" type="button" class="nav-btn" onclick="location.href='/fuel_quote'">Get Fuel Quote</button>
-      <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='/fuel_history'">Quote History</button>
-      <button id="signOut" type="button" class="nav-btn">Sign Out</button>
-    </nav>
+  <nav class="top-nav">
+    <button id="homePage" type="button" class="nav-btn" onclick="location.href='/dashboard'">Dashboard</button>
+    <button id="profile" type="button" class="nav-btn" onclick="location.href='/profile'">Profile</button>
+    <button id="getQuote" type="button" class="nav-btn" onclick="location.href='/fuel_quote'">Get Fuel Quote</button>
+    <button id="quoteHistory" type="button" class="nav-btn" onclick="location.href='/fuel_history'">Quote History</button>
+    <button id="signOut" type="button" class="nav-btn" onclick="location.href='/logout'">Sign Out</button>
+  </nav>
     <div class="background"></div>
-    <div class="cover">
-      <div class="profile-pic"></div>
-    </div>
+    <div class="cover"></div>
     <div class="info-field">
-      <button type="button" class="edit-btn" onclick="location.href='/profile'">Edit Profile</button>
       <div class="info-input-class-container">
         <form action ="/fuel_quote" class="info-input-class" method="POST">
             <label for="gallonsRequested" class="info-label-required">Gallons Requested</label><br>

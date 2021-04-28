@@ -55,7 +55,7 @@ html, body {
     position: fixed;
     line-height: 65px;
     text-align: center;
-    z-index: 1;
+    z-index: 3;
 }
 
 .nav div.logo {
@@ -323,6 +323,10 @@ html, body {
     font-size: 14px;
 }
 
+#loginSubmit {
+    margin-top: 40px;
+}
+
 .submit-btn:hover {
     background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),
     linear-gradient(to right, #3bff7c, #fff458);
@@ -342,6 +346,7 @@ html, body {
     background-image: url(https://images.unsplash.com/photo-1496629062893-b0f566065d44?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);
     background-position: center;
     background-size: cover;
+    overflow: auto;
 }
 
 .cover {
@@ -357,7 +362,8 @@ html, body {
     height: 140px;
     border-radius: 50%;
     border: 4px solid #fff;
-    background-color: rgb(190, 190, 190);
+    background-image: url(https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg);
+    background-size: cover;
     position: relative;
     left: 8%;
     top: 67%;
@@ -365,7 +371,7 @@ html, body {
 
 .info-field {
     width: 75%;
-    min-height: 800px;
+    height:100%;
     top: 200px;
     margin: auto;
     background-color: #fff;
@@ -388,13 +394,30 @@ html, body {
     top: 24px;
 }
 
+.save-btn {
+    width: 30%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    color: rgb(101, 219, 255);
+    background-color: #fff;
+    border: 2px solid rgb(125, 225, 255);
+    font-weight: bold;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    position: relative;
+    left: 35%;
+    top: 24px;
+}
+
 .edit-btn:hover,.save-btn:hover {
     background: linear-gradient(rgba(0,0,0,0.05),rgba(0,0,0,0.05));
 }
 
 .top-nav {
     width: 100%;
-    height: 50px;
+    height: 60px;
     position: fixed;
     line-height: 65px;
     text-align: center;
@@ -403,7 +426,7 @@ html, body {
 }
 
 .nav-btn {
-    height: 50px;
+    height: 60px;
     position: absolute;
     cursor: pointer;
     display: block;
@@ -418,10 +441,23 @@ html, body {
 
 #homePage {
     left: 12.5%;
+    transition: 0.5s;
 }
 
 #homePage:hover {
-    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+#profile {
+    left: 60%;
+    width: 90px;
+    transition: 0.5s;
+}
+
+#profile:hover {
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 #getQuote {
@@ -455,9 +491,19 @@ html, body {
     color: black;
 }
 
+.welcome {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 30px 40px;
+}
+
 .info-input-class-container {
     width: 80%;
-    margin: 8% auto;
+    height: auto;
+    min-height: 70%;
+    margin: auto;
+    top: 70px;
+    position: relative;
     border: 1px solid #111;
     border-radius: 30px;
 }
@@ -495,10 +541,12 @@ html, body {
 
 .fuel-history-table {
     width: 90%;
-    margin: 8% auto;
+    margin: auto;
+    top: 8%;
     text-align: center;
     font-size: 15px;
     border-collapse: collapse;
+    position: relative;
 }
 
 .fuel-history-table-header {
@@ -525,12 +573,23 @@ tr:nth-child(2n) {
 }
 
 #cityOne,#cityTwo {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#cityOneR,#cityTwoR {
     width: 45%;
     margin-bottom: 40px;
     margin-right: 10px;
 }
 
 #stateOne,#stateTwo {
+    margin-bottom: 40px;
+    margin-right: 10px;
+}
+
+#stateOneR,#stateTwoR {
+    width: 10%;
     margin-bottom: 40px;
     margin-right: 10px;
 }
@@ -604,3 +663,42 @@ tr:nth-child(2n) {
     margin-top: 10%;
     margin-left: 10%;
 }
+
+.alert {
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    background-color: #3bff7c;
+    position: relative;
+}
+
+.main-btn {
+    width: 30%;
+    height: 35%;
+    padding: 10px 30px;
+    margin-right: 10%;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    outline: none;
+    border-radius: 30px;
+    font-size: 30px;
+    position: relative;
+    left: 15%;
+    top: 50px;
+    background: rgb(125, 225, 255);  
+    border: 1px solid darken(rgb(125, 225, 255), 4%);
+    font-weight: 900;
+    letter-spacing: 1px;
+    transition: all 150ms linear;
+}
+
+.main-btn:hover {
+    background: darken(rgb(125, 225, 255), 1.5%);
+    border: 1px solid rgba(#000, .05);
+    box-shadow: 1px 1px 2px rgba(#fff, .2);
+    color: lighten(rgb(125, 225, 255), 18%); 
+    text-decoration: none;
+    text-shadow: -1px -1px 0 darken(rgb(125, 225, 255), 9.5%);
+    transition: all 250ms linear;
+  }

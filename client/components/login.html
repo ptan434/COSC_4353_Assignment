@@ -11,7 +11,7 @@
   <nav class="nav">
     <div class="container">
         <div class="logo">
-            <a href="index.html">Logo</a>
+            <a href="/index">Group 19</a>
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
@@ -23,16 +23,19 @@
     </div>
   </nav>
   <div class="home">
+    <% if(message){ %>
+      <div class="alert"><%= message %></div>
+    <% } %>
     <div class="auth-field-login">
       <div class="login-text">
         <h1>Log In</h1>
       </div>
       <form id="login" class="auth-input-class" action="/new_user" method="POST">
         <input id="loginUserID" name="loginUserID" type="text" class="input-field" placeholder="User ID" required>
-        <input id="loginPass" name="loginPass" type="text" class="input-field" placeholder="Password" required>
-        <input id="loginSave" name="loginSave" type="checkbox" class="check-box"><span class="login-save">Remember Me</span>
+        <input id="loginPass" name="loginPass" type="password" class="input-field" placeholder="Password" required>
+        <!-- <input id="loginSave" name="loginSave" type="checkbox" class="check-box"><span class="login-save">Remember Me</span> -->
         <button id="loginSubmit" type="submit" class="submit-btn">Next</button>
-        <div id="forgotPass"><a href="#">Forgot Password</a></div>
+        <div id="forgotPass"><a href="/reset_password">Forgot Password</a></div>
       </form>
     </div>
     <div id="slideshow">
