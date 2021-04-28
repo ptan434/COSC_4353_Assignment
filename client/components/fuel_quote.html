@@ -40,7 +40,7 @@
               </div><br><br>
             <!-- <label for="total_cost" class="info-label-required">Total: </label><br> -->
             <!-- <button id="total_cost">Calculate</button><br> -->
-            <button id="fuel_quoteSubmit" type="submit" class="submit-btn" onclick="fuel_history"> Submit!</button>
+            <button id="fuel_quoteSubmit" type="submit" class="submit-btn" onclick="calculateTotal()"> Submit!</button>
         </form> 
             
     </div>
@@ -53,10 +53,8 @@
       
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
-      
-      // When the user clicks the button, open the modal 
-      btn.onclick = function() {
-        modal.style.display = "block";
+
+      function calculateTotal() {
         var current_price = 1.50;
         var company_profit = 0.10;
         var gallons_requested = document.getElementById("gallonsRequested").value;
@@ -74,6 +72,12 @@
         
         document.getElementById("suggestedPrice").value = "$" + suggested_price;
         document.getElementById("total").value = "$" + total_price;
+      }
+      
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+        calculateTotal();
       }
       
       // When the user clicks on <span> (x), close the modal
